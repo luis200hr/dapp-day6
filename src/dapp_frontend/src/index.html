@@ -1,24 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>dapp</title>
-    <base href="/" />
-    <link rel="icon" href="favicon.ico" />
+    <title>Dapp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link type="text/css" rel="stylesheet" href="main.css" />
+ 
   </head>
+
   <body>
-    <main>
-      <img src="logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#">
-        <label for="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
+    <div class="encabezado">
+        <h1>Homediary</h1>
+    </div>
+    <!-- Formulario para agregar nueva tarea -->
+    <div class="panel checkout-step">
+      <form action="#" id="myForm">
+        <div id="registro" class="d-flex my-2">
+          <input id="name" type="text" class="form-control mr-2" placeholder="Name" required>
+          <input id="desp" type="text" class="form-control mr-2" placeholder="Description" required>
+          <input id="fecha" type="date" class="form-control mr-2" required>
+          <input id="state" type="checkbox" id="checkbox">
+          <input id="submit-btn" type="submit" value="Add" />
+      </div>
       </form>
-      <section id="greeting"></section>
-    </main>
+    </div>
+    <div class="contenedor">
+      <div class="hijo">
+        <div class="box0">
+          <legend>Get Homework</legend>
+          <div class="contenido1">
+            <input class="botonSumit" id="submit-btn2" type="submit" value="All" />
+            <input class="botonSumit" id="taskpendig" type="submit" value="Pending" />
+          </div>
+        </div>
+      </div>
+      <div class="hijo">
+        <div class="box1">
+          <legend>Manage by ID</legend>
+          <div class="contenido1">
+            <input id="searchById" type="text" placeholder="Id">
+            <input class="botonSumit" id="borrar" type="submit" value="Delete" />
+            <input class="botonSumit" id="completado" type="submit" value="Completed" />
+            <input class="botonSumit" id="obtener" type="submit" value="Get" />
+          </div>
+        </div>
+      </div>
+      <div class="hijo">
+        <div class="box2">
+          <legend>Search by name or description</legend>
+          <div class="contenido1">
+            <input id="search" type="text" placeholder="name, description">
+            <input class="botonSumit" id="busqueda" type="submit" value="Go" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de tareas -->
+    <div class="container23" id="container">
+        
+    </div>
+    
+      <!-- Formulario para actualizar una tarea -->
+    <div class="form-update" id="actualizar">
+      <form action="#" id="myForm2">
+        <div id="registro" class="d-flex my-2">
+          <input id="clave" type="text"  placeholder="Id">
+          <input id="name2" type="text" class="form-control mr-2" placeholder="Name" required>
+          <input id="desp2" type="text" class="form-control mr-2" placeholder="Description" required>
+          <input id="fecha2" type="date" class="form-control mr-2" required>
+          <input id="state2" type="checkbox" id="checkbox">
+          <input class="botonSumit" id="upda" type="submit" value="Update" />
+      </div>
+      </form>
+    </div>
+
+    
   </body>
+
 </html>
