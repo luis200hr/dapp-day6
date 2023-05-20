@@ -1,13 +1,41 @@
-import { dapp_backend, prueba_backend } from "../../declarations/dapp_backend";
-
+import { canisterId, createActor } from "../../declarations/dapp_backend";
+import { HttpAgent } from "@dfinity/agent";
+import { AuthClient } from "@dfinity/auth-client";
 const formUpdate = document.getElementById("actualizar");
 
+let authClient = await AuthClient.create();
+let dapp_backend;
 window.addEventListener("load", function(){
   console.log("se cargo la funcion");
 });
+const BtnLog = document.getElementById("sesion");
+BtnLog.onclick =  async () => {
+    if(await authClient.isAuthenticated()){
+      authClient.logout();
+      alert("se cerro la session");
+      return;
+    }
+    await authClient.login({
+    onSuccess: async () => {
+      alert("logeado");
+      let identity = authClient.getIdentity();
+      dapp_backend = createActor(canisterId, {agent: new HttpAgent({identity})});
+    },
+    onError: async () =>{
+      alert("error en logearse");
+    }
+  });
+};
 const formulario = document.getElementById("myForm");
 document.querySelector("form").addEventListener("submit", async function(event){
   event.preventDefault();
+  let usuarioOn = await authClient.isAuthenticated()
+  if (!usuarioOn) {
+    alert("no aute");
+    return;
+  }
+
+  
   const button = event.target.querySelector("#submit-btn");
 
   const name = document.getElementById("name").value;
