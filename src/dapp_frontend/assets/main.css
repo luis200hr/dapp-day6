@@ -307,3 +307,23 @@ legend {
 #logoimg{
   size: 1rem;
 }
+#sesion{
+  border: 3.5px solid #525256;
+  border-radius: 18px;
+  display: inline-block;
+  font-family: Verdana;
+  letter-spacing: -1px;
+  font-size: 15px;
+  user-select: none;
+  font-weight: bold;
+  color: #fcfcff;
+  transition: all .195s ease-in-out;
+  cursor: pointer;
+  background-color: #211f2b;
+}
+#sesion:hover{
+    border: 2px solid #8b80f9;
+    box-shadow: #8b80f9 0px 0px 12px 1px inset,
+    #8b80f9 0px 0px 12px 1px;
+    border-radius: 99px;
+}

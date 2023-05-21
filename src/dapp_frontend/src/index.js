@@ -3,35 +3,52 @@ import { HttpAgent } from "@dfinity/agent";
 import { AuthClient } from "@dfinity/auth-client";
 const formUpdate = document.getElementById("actualizar");
 
-let authClient = await AuthClient.create();
 let dapp_backend;
-window.addEventListener("load", function(){
-  console.log("se cargo la funcion");
-});
+let authClient = await AuthClient.create();
+/*try{
+  let identity = authClient.getIdentity();
+    dapp_backend = createActor(canisterId, {agent: new HttpAgent({identity})});
+}catch{
+  console.log("no se pudo");
+}*/
 const BtnLog = document.getElementById("sesion");
+if (await authClient.isAuthenticated()) {
+  handleAuthenticated(authClient);
+  BtnLog.value = "Logout";
+}
+async function handleAuthenticated(authClient) {
+  let identity = authClient.getIdentity();
+  dapp_backend = createActor(canisterId, {agent: new HttpAgent({identity})});
+}
+
 BtnLog.onclick =  async () => {
     if(await authClient.isAuthenticated()){
       authClient.logout();
-      alert("se cerro la session");
+      BtnLog.value = "Login";
+      alert("Session closed");
       return;
     }
-    await authClient.login({
+    authUrl = await authClient.login({
     onSuccess: async () => {
       alert("logeado");
-      let identity = authClient.getIdentity();
-      dapp_backend = createActor(canisterId, {agent: new HttpAgent({identity})});
+      BtnLog.value = "Logout";
+      handleAuthenticated(authClient);
+      //let identity = authClient.getIdentity();
+      //dapp_backend = createActor(canisterId, {agent: new HttpAgent({identity})});
     },
     onError: async () =>{
-      alert("error en logearse");
-    }
+      alert("error logging");
+    },
+    windowOpenerFeatures: "width=500,height=500,toolbar=0,location=0,menubar=0,left=100,top=100"
   });
+  window.open(authUrl, "loginPopup", "width=500,height=600");
 };
 const formulario = document.getElementById("myForm");
 document.querySelector("form").addEventListener("submit", async function(event){
   event.preventDefault();
   let usuarioOn = await authClient.isAuthenticated()
   if (!usuarioOn) {
-    alert("no aute");
+    alert("user not authenticated");
     return;
   }
 
